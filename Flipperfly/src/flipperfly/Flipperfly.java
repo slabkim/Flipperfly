@@ -1,4 +1,4 @@
-package Flipperfly;
+package Flipperfly.src.flipperfly;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
