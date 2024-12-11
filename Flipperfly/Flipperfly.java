@@ -13,7 +13,7 @@ public class Flipperfly extends Application {
         Scene scene = new Scene(root, 1280, 720);
 
         primaryStage.setScene(scene);
-        primaryStage.setTitle("9/11");
+        primaryStage.setTitle("Flipperfly");
         primaryStage.setResizable(true);
         primaryStage.show();
     }
