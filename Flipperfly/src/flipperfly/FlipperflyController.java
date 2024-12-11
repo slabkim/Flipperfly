@@ -1,4 +1,4 @@
-package Flipperfly.src.flipperfly;
+package flipperfly;
 
 public class FlipperflyController {
     
