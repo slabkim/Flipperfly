@@ -12,3 +12,9 @@ public Building(int x, int y, Image img) {
         super(x, y, 84, BUILDING_HEIGHT);
         this.img = img;
     }
+
+      @Override
+    public void draw(GraphicsContext gc) {
+        gc.drawImage(img, x, y, width, height);
+    }
+}
