@@ -1,7 +1,7 @@
 # Flipperfly
 A game using java FXML
 
-![image](https://github.com/user-attachments/assets/916c4aa4-e712-4c95-abc3-1021c39eadf5)
+![image](https://github.com/user-attachments/assets/07103477-3e23-4773-8070-0926929b7821)
 ![image](https://github.com/user-attachments/assets/dc00a197-7218-48f1-aadd-001ef14aff8b)
 ![image](https://github.com/user-attachments/assets/6347def7-6f1b-4dbc-b2a8-380d530a2bb0)
 
