@@ -12,7 +12,6 @@ public class Flipperfly extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("Menu.fxml"));
         Scene scene = new Scene(root, 1280, 720);
 
-        primaryStage.setScene(scene);
         primaryStage.setTitle("Flipperfly");
         primaryStage.setResizable(true);
         primaryStage.show();
