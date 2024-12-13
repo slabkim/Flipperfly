@@ -36,6 +36,7 @@ public class FlipperflyController {
     private boolean spaceHeld = false;
     private boolean gameStarted = false;
     public static int globalScore = 0; 
+
     public void initialize() {
 
     }
@@ -45,13 +46,25 @@ public class FlipperflyController {
     private void setupKeyListeners() {
 
     }
-    abstract class GameObject {
+    private void updateVelocity(){
 
     }
-    class Plane extends GameObject {
+    private void startGameLoop(){
 
     }
-    class Building extends GameObject {
-        
+    private void move(){
+
+    }
+    private void render(){
+
+    }
+    private void placeBuildings(){
+
+    }
+    private boolean collision(GameObject obj1, GameObject obj2){
+        return obj1.x < obj2.x + obj2.width &&
+        obj1.x + obj1.width > obj2.x &&
+        obj1.y < obj2.y + obj2.height &&
+        obj1.y + obj1.height > obj2.y;
     }
 }
