@@ -25,19 +25,7 @@ public class FlipperflyController {
     private final Image gameOverImg = new Image(getClass().getResource("/Assets/gameover.png").toExternalForm());
     public  Media backsound = new Media(getClass().getResource("/Assets/Backsound.mp3").toExternalForm());
     
-    private Plane plane;
-    private ArrayList<Building> buildings = new ArrayList<>();
-    private boolean gameOver;
-    private double score;
-    private MediaPlayer backgroundMusicPlayer;
-
-    private int velocityY;
-    private final int velocityX = -10;
-
-    private AnimationTimer gameLoop;
-    private boolean spaceHeld = false;
-    private boolean gameStarted = false;
-    public static int globalScore = 0; 
+    
     public void initialize() {
 
     }
