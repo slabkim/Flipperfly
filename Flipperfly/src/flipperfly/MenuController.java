@@ -26,7 +26,7 @@ public class MenuController {
             Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
 
             stage.setScene(new Scene(root));
-            stage.setTitle("Game Scene");
+            stage.setTitle("Flipperfly");
         } catch (Exception e) {
             e.printStackTrace();
         }
