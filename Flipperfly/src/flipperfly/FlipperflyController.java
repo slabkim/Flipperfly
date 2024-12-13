@@ -29,7 +29,7 @@ public class FlipperflyController {
     private double score;
     private MediaPlayer backgroundMusicPlayer;
 
-   private int velocityY;
+    private int velocityY;
     private final int velocityX = -10;
 
     private AnimationTimer gameLoop;
@@ -66,7 +66,35 @@ public class FlipperflyController {
 
     }
     private void move(){
+        if (!gameStarted) {
+            return;
+        }
 
+        updateVelocity();
+        plane.y += velocityY;
+        plane.y = Math.max(plane.y, 0);
+
+        for (Building building : buildings) {
+            building.x += velocityX;
+
+            if (!building.passed && plane.x > building.x + building.width) {
+                score += 0.5;
+                globalScore++;
+                building.passed = true;
+            }
+
+            if (collision(plane, building)) {
+                plane.explode();
+                plane.setExplosionSize(500);
+                gameOver = true;
+            }
+        }
+
+        buildings.removeIf(building -> building.x + building.width < 0);
+
+        if (plane.y > canvas.getHeight()) {
+            gameOver = true;
+        }
     }
     private void render(){
 
