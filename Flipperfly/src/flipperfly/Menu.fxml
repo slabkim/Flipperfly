@@ -1,11 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1">
-    
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml.MenuController">
+   <children>
+      <ImageView fitHeight="720.0" fitWidth="1280.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Assets/backgroundlandscape.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="550.0" fitWidth="527.0" layoutX="371.0" layoutY="109.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Assets/MENUpolos.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="playbutton" fitHeight="65.0" fitWidth="192.0" layoutX="561.0" layoutY="279.0" onMouseClicked="#goToScene2" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Assets/ButtonPLay.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="exitbutton" fitHeight="65.0" fitWidth="192.0" layoutX="559.0" layoutY="394.0" onMouseClicked="#exitApp" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Assets/ButtonExit.png" />
+         </image>
+      </ImageView>
+   </children>
 </AnchorPane>
