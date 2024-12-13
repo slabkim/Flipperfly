@@ -48,7 +48,13 @@ public class FlipperflyController {
         backgroundMusicPlayer.play();
     }
     private void initializeGame() {
-
+        plane = new Plane((int) canvas.getWidth() / 8, (int) canvas.getHeight() / 2, planeImg);
+        buildings.clear();
+        score = 0;
+        gameOver = false;
+        velocityY = 0;
+        globalScore = 0;
+        gameStarted = false;
     }
     private void setupKeyListeners() {
 
