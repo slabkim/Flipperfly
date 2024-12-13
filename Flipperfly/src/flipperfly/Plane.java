@@ -8,3 +8,20 @@ public class Plane extends GameObject {
     private final Image img;
     private boolean exploded = false;
     private int explosionSize = 500;
+
+public Plane(int x, int y, Image img) {
+        super(x, y, 54, 44);
+        this.img = img;
+    }
+
+    public boolean isExploded() {
+        return exploded;
+    }
+
+    public void explode() {
+        exploded = true;
+    }
+
+    public void setExplosionSize(int size) {
+        this.explosionSize = size;
+    }
