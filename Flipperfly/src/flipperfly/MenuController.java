@@ -16,3 +16,8 @@ import javafx.stage.Stage;
 public class MenuController {
     private void goToScene2(MouseEvent event) {
 
+ }
+    private void exitApp(MouseEvent event) {
+        
+    }
+}
