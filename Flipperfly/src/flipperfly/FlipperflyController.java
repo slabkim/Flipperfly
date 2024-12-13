@@ -57,15 +57,57 @@ public class FlipperflyController {
         gameStarted = false;
     }
     private void setupKeyListeners() {
+        canvas.setFocusTraversable(true);
+        canvas.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.SPACE) {
+                if (!gameStarted) {
+                    gameStarted = true;
+                } else if (!gameOver) {
+                    spaceHeld = true;
+                }
 
-    }
-    private void updateVelocity(){
+                if (gameOver) {
+                    initializeGame();
+                }
+            }
+        });
 
+        canvas.setOnKeyReleased(event -> {
+            if (event.getCode() == KeyCode.SPACE) {
+                spaceHeld = false;
+            }
+        });
     }
-    private void startGameLoop(){
 
+    private void updateVelocity() {
+        if (spaceHeld) {
+            velocityY = Math.max(velocityY - 1, -15);
+        } else {
+            velocityY = Math.min(velocityY + 1, 15);
+        }
     }
-    private void move(){
+
+    private void startGameLoop() {
+        gameLoop = new AnimationTimer() {
+            private long lastBuildingTime = 0;
+
+            @Override
+            public void handle(long now) {
+                if (!gameOver) {
+                    move();
+                    render();
+
+                    if (now - lastBuildingTime > 1_500_000_000) {
+                        placeBuildings();
+                        lastBuildingTime = now;
+                    }
+                }
+            }
+        };
+        gameLoop.start();
+    }
+
+    private void move() {
         if (!gameStarted) {
             return;
         }
@@ -97,11 +139,39 @@ public class FlipperflyController {
         }
     }
     private void render(){
+        gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
+        plane.draw(gc);
 
+        for (Building building : buildings) {
+            building.draw(gc);
+        }
+
+        gc.setFont(new Font("Arial", 20));
+        gc.fillText("Score: " + (int) score, 10, 35);
+
+        if (!gameStarted) {
+            gc.setFont(new Font("Arial", 30));
+            gc.fillText("Press SPACE to Start", canvas.getWidth() / 2 - 120, canvas.getHeight() / 2);
+        }
+
+        if (gameOver) {
+            double imgWidth = 700;
+            double imgHeight = 700;
+
+            double imgX = (canvas.getWidth() - imgWidth) / 2;
+            double imgY = (canvas.getHeight() - imgHeight) / 2;
+
+            gc.drawImage(gameOverImg, imgX, imgY, imgWidth, imgHeight);
+        }
     }
     private void placeBuildings(){
+        int openingSpace = (int) canvas.getHeight() / 4;
+        int randomBuildingY = (int) (-Building.BUILDING_HEIGHT / 4 - Math.random() * (Building.BUILDING_HEIGHT / 2));
 
+        buildings.add(new Building((int) canvas.getWidth(), randomBuildingY, topBuilding));
+        buildings.add(new Building((int) canvas.getWidth(), randomBuildingY + Building.BUILDING_HEIGHT + openingSpace, bottomBuilding));
     }
+    
     private boolean collision(GameObject obj1, GameObject obj2){
         return obj1.x < obj2.x + obj2.width &&
         obj1.x + obj1.width > obj2.x &&
