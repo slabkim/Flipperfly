@@ -31,7 +31,13 @@ public class FlipperflyController {
     private double score;
     private MediaPlayer backgroundMusicPlayer;
 
-   
+   private int velocityY;
+    private final int velocityX = -10;
+
+    private AnimationTimer gameLoop;
+    private boolean spaceHeld = false;
+    private boolean gameStarted = false;
+    public static int globalScore = 0; 
     public void initialize() {
 
     }
