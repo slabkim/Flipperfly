@@ -19,7 +19,6 @@ public class FlipperflyController {
     private final Image planeImg = new Image(getClass().getResource("/Assets/pesawat.png").toExternalForm());
     private final Image topBuilding = new Image(getClass().getResource("/Assets/topgedung.png").toExternalForm());
     private final Image bottomBuilding = new Image(getClass().getResource("/Assets/bottomgedung .png").toExternalForm());
-    private final Image explosionImg = new Image(getClass().getResource("/Assets/explossion.png").toExternalForm());
     private final Image gameOverImg = new Image(getClass().getResource("/Assets/gameover.png").toExternalForm());
     public  Media backsound = new Media(getClass().getResource("/Assets/Backsound.mp3").toExternalForm());
     
