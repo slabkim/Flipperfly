@@ -25,3 +25,13 @@ public Plane(int x, int y, Image img) {
     public void setExplosionSize(int size) {
         this.explosionSize = size;
     }
+
+     @Override
+    public void draw(GraphicsContext gc) {
+        if (exploded) {
+            gc.drawImage(explosionImg, x - explosionSize / 2, y - explosionSize / 2, explosionSize, explosionSize);
+        } else {
+            gc.drawImage(img, x, y, width, height);
+        }
+    }
+}
