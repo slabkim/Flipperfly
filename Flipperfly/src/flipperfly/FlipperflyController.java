@@ -38,7 +38,14 @@ public class FlipperflyController {
     public static int globalScore = 0; 
 
     public void initialize() {
-
+        gc = canvas.getGraphicsContext2D();
+        initializeGame();
+        setupKeyListeners();
+        startGameLoop();
+        backgroundMusicPlayer = new MediaPlayer(backsound);
+        backgroundMusicPlayer.setOnEndOfMedia(() -> backgroundMusicPlayer.seek(Duration.ZERO));
+        backgroundMusicPlayer.setVolume(0.5);
+        backgroundMusicPlayer.play();
     }
     private void initializeGame() {
 
