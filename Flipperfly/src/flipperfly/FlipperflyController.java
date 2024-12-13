@@ -1,8 +1,6 @@
 package flipperfly;
 
 import java.util.ArrayList;
-
-import Flipperfly.src.flipperfly.FlipperflyController.Plane;
 import javafx.animation.AnimationTimer;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;

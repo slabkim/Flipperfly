@@ -1,4 +1,4 @@
-package fxml;
+package flipperfly;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
