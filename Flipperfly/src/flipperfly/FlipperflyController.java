@@ -1,6 +1,11 @@
 package flipperfly;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Scanner;
 import javafx.animation.AnimationTimer;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
@@ -20,8 +25,8 @@ public class FlipperflyController {
     private final Image topBuilding = new Image(getClass().getResource("/Assets/topgedung.png").toExternalForm());
     private final Image bottomBuilding = new Image(getClass().getResource("/Assets/bottomgedung .png").toExternalForm());
     private final Image gameOverImg = new Image(getClass().getResource("/Assets/gameover.png").toExternalForm());
-    public  Media backsound = new Media(getClass().getResource("/Assets/Backsound.mp3").toExternalForm());
-    
+    public Media backsound = new Media(getClass().getResource("/Assets/Backsound.mp3").toExternalForm());
+
     private Plane plane;
     private ArrayList<Building> buildings = new ArrayList<>();
     private boolean gameOver;
@@ -30,14 +35,15 @@ public class FlipperflyController {
 
     private int velocityY;
     private final int velocityX = -10;
-
     private AnimationTimer gameLoop;
     private boolean spaceHeld = false;
     private boolean gameStarted = false;
-    public static int globalScore = 0; 
+    public static int globalScore = 0;
+    private int highScore;
 
     public void initialize() {
         gc = canvas.getGraphicsContext2D();
+        loadHighScore();
         initializeGame();
         setupKeyListeners();
         startGameLoop();
@@ -46,6 +52,7 @@ public class FlipperflyController {
         backgroundMusicPlayer.setVolume(0.5);
         backgroundMusicPlayer.play();
     }
+
     private void initializeGame() {
         plane = new Plane((int) canvas.getWidth() / 8, (int) canvas.getHeight() / 2, planeImg);
         buildings.clear();
@@ -55,6 +62,7 @@ public class FlipperflyController {
         globalScore = 0;
         gameStarted = false;
     }
+
     private void setupKeyListeners() {
         canvas.setFocusTraversable(true);
         canvas.setOnKeyPressed(event -> {
@@ -128,6 +136,7 @@ public class FlipperflyController {
                 plane.explode();
                 plane.setExplosionSize(500);
                 gameOver = true;
+                checkAndUpdateHighScore();
             }
         }
 
@@ -135,9 +144,11 @@ public class FlipperflyController {
 
         if (plane.y > canvas.getHeight()) {
             gameOver = true;
+            checkAndUpdateHighScore();
         }
     }
-    private void render(){
+
+    private void render() {
         gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
         plane.draw(gc);
 
@@ -147,6 +158,7 @@ public class FlipperflyController {
 
         gc.setFont(new Font("Arial", 20));
         gc.fillText("Score: " + (int) score, 10, 35);
+        gc.fillText("High Score: " + highScore, 10, 65);
 
         if (!gameStarted) {
             gc.setFont(new Font("Arial", 30));
@@ -161,20 +173,46 @@ public class FlipperflyController {
             double imgY = (canvas.getHeight() - imgHeight) / 2;
 
             gc.drawImage(gameOverImg, imgX, imgY, imgWidth, imgHeight);
+            gc.setFont(new Font("Arial", 30));
         }
     }
-    private void placeBuildings(){
+    private void loadHighScore() {
+        try (Scanner scanner = new Scanner(new File("highscore.txt"))) {
+            if (scanner.hasNextInt()) {
+                highScore = scanner.nextInt();
+            } else {
+                highScore = 0;
+            }
+        } catch (FileNotFoundException e) {
+            highScore = 0;
+        }
+    }
+    private void saveHighScore() {
+        try (PrintWriter writer = new PrintWriter(new File("highscore.txt"))) {
+            writer.println(highScore);
+        } catch (IOException e) {
+            System.err.println("Error saving high score: " + e.getMessage());
+        }
+    }
+    private void checkAndUpdateHighScore() {
+        if (score > highScore) {
+            highScore = (int) score;
+            saveHighScore();
+        }
+    }
+
+    private void placeBuildings() {
         int openingSpace = (int) canvas.getHeight() / 4;
         int randomBuildingY = (int) (-Building.BUILDING_HEIGHT / 4 - Math.random() * (Building.BUILDING_HEIGHT / 2));
 
         buildings.add(new Building((int) canvas.getWidth(), randomBuildingY, topBuilding));
         buildings.add(new Building((int) canvas.getWidth(), randomBuildingY + Building.BUILDING_HEIGHT + openingSpace, bottomBuilding));
     }
-    
-    private boolean collision(GameObject obj1, GameObject obj2){
+
+    private boolean collision(GameObject obj1, GameObject obj2) {
         return obj1.x < obj2.x + obj2.width &&
-        obj1.x + obj1.width > obj2.x &&
-        obj1.y < obj2.y + obj2.height &&
-        obj1.y + obj1.height > obj2.y;
+                obj1.x + obj1.width > obj2.x &&
+                obj1.y < obj2.y + obj2.height &&
+                obj1.y + obj1.height > obj2.y;
     }
-}
+}   
