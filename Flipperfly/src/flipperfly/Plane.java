@@ -9,7 +9,7 @@ public class Plane extends GameObject {
     private boolean exploded = false;
     private int explosionSize = 500;
 
-public Plane(int x, int y, Image img) {
+    public Plane(int x, int y, Image img) {
         super(x, y, 54, 44);
         this.img = img;
     }
@@ -29,9 +29,9 @@ public Plane(int x, int y, Image img) {
      @Override
     public void draw(GraphicsContext gc) {
         if (exploded) {
-            gc.drawImage(explosionImg, x - explosionSize / 2, y - explosionSize / 2, explosionSize, explosionSize);
+            gc.drawImage(explosionImg, getX() - explosionSize / 2, getY() - explosionSize / 2, explosionSize, explosionSize);
         } else {
-            gc.drawImage(img, x, y, width, height);
+            gc.drawImage(img, getX(), getY(), getWidth(), getHeight());
         }
     }
 }

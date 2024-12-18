@@ -120,13 +120,13 @@ public class FlipperflyController {
         }
 
         updateVelocity();
-        plane.y += velocityY;
-        plane.y = Math.max(plane.y, 0);
+        plane.setY(plane.getY() + velocityY);
+        plane.setY(Math.max(plane.getY(), 0));
 
         for (Building building : buildings) {
-            building.x += velocityX;
+            building.setX(building.getX() + velocityX);
 
-            if (!building.passed && plane.x > building.x + building.width) {
+            if (!building.passed && plane.getX() > building.getX() + building.getWidth()) {
                 score += 0.5;
                 globalScore++;
                 building.passed = true;
@@ -140,9 +140,9 @@ public class FlipperflyController {
             }
         }
 
-        buildings.removeIf(building -> building.x + building.width < 0);
+        buildings.removeIf(building -> building.getX() + building.getWidth() < 0);
 
-        if (plane.y > canvas.getHeight()) {
+        if (plane.getY() > canvas.getHeight()) {
             gameOver = true;
             checkAndUpdateHighScore();
         }
@@ -210,9 +210,9 @@ public class FlipperflyController {
     }
 
     private boolean collision(GameObject obj1, GameObject obj2) {
-        return obj1.x < obj2.x + obj2.width &&
-                obj1.x + obj1.width > obj2.x &&
-                obj1.y < obj2.y + obj2.height &&
-                obj1.y + obj1.height > obj2.y;
+        return obj1.getX() < obj2.getX() + obj2.getWidth() &&
+                obj1.getX() + obj1.getWidth() > obj2.getX() &&
+                obj1.getY() < obj2.getY() + obj2.getHeight() &&
+                obj1.getY() + obj1.getHeight() > obj2.getY();
     }
 }   

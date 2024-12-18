@@ -15,6 +15,6 @@ public class Building extends GameObject {
 
     @Override
     public void draw(GraphicsContext gc) {
-        gc.drawImage(img, x, y, width, height);
+        gc.drawImage(img, getX(), getY(), getWidth(), getHeight());
     }
 }
